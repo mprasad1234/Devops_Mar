@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Rapido - Bike Taxi | India's Fastest Bike Taxi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff4757 100%);
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .promo {
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Booking Card */
+        .booking-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+
+        .booking-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .location-input {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .location-input input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .location-input input:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255,107,53,0.1);
+        }
+
+        .location-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        .swap-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #f0f0f0;
+            border: none;
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swap-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .ride-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .ride-option {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ride-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .ride-option.selected {
+            border-color: #ff6b35;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8e0 100%);
+        }
+
+        .ride-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .ride-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .ride-price {
+            color: #ff6b35;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .fare-details {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .fare-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .fare-row:last-child {
+            border-bottom: none;
+        }
+
+        .total-fare {
+            font-weight: bold;
+            color: #ff6b35;
+            font-size: 1.3rem;
+        }
+
+        .book-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff4757 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,53,0.3);
+        }
+
+        .book-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Ride Status */
+        .ride-status {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .status-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .status-icon {
+            font-size: 60px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .driver-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .driver-avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff4757 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .driver-details {
+            flex: 1;
+        }
+
+        .driver-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin: 5px 0;
+        }
+
+        .otp-box {
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe8e0 100%);
+            border: 2px dashed #ff6b35;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .otp-code {
+            font-size: 40px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            color: #ff6b35;
+            margin: 10px 0;
+        }
+
+        .map-placeholder {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            height: 200px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .moving-bike {
+            position: absolute;
+            font-size: 40px;
+            animation: moveBike 8s linear infinite;
+        }
+
+        @keyframes moveBike {
+            0% { left: -50px; transform: rotate(0deg); }
+            100% { left: 100%; transform: rotate(360deg); }
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cancel-btn {
+            flex: 1;
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .cancel-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        /* Ride History */
+        .history-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .history-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .history-item:hover {
+            transform: translateX(5px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .modal-content input:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1100;
+            animation: slideUp 0.3s ease;
+            white-space: nowrap;
+        }
+
+        /* Promo Code */
+        .promo-code {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .promo-code input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .apply-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .driver-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .toast {
+                white-space: normal;
+                text-align: center;
+                max-width: 90%;
+            }
+            .ride-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🛵</span>
+                <span>Rapido</span>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showBooking()">🚖 Book Ride</button>
+                <button class="nav-btn" onclick="showHistory()">📜 Ride History</button>
+                <button class="nav-btn" onclick="showOffers()">🎁 Offers</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <h1>India's Fastest Bike Taxi 🛵</h1>
+            <p>Get a ride in minutes. Safe, Affordable, and Convenient!</p>
+            <div class="promo">🔥 FIRST RIDE FREE | Use code: RAPIDO2024 🔥</div>
+        </div>
+
+        <!-- Booking Section -->
+        <div id="bookingSection">
+            <div class="booking-card">
+                <h2 style="margin-bottom: 20px;">Where would you like to go?</h2>
+                
+                <div class="location-input">
+                    <span class="location-icon">📍</span>
+                    <input type="text" id="pickup" placeholder="Enter pickup location" value="MG Road, Bangalore">
+                    <button class="swap-btn" onclick="swapLocations()">🔄</button>
+                </div>
+
+                <div class="location-input">
+                    <span class="location-icon">🏁</span>
+                    <input type="text" id="destination" placeholder="Enter destination" value="Electronic City, Bangalore">
+                </div>
+
+                <div class="ride-options">
+                    <div class="ride-option selected" onclick="selectRide(this, 'bike', 25)">
+                        <div class="ride-icon">🛵</div>
+                        <div class="ride-name">Rapido Bike</div>
+                        <div class="ride-price">Starting ₹25</div>
+                    </div>
+                    <div class="ride-option" onclick="selectRide(this, 'electric', 20)">
+                        <div class="ride-icon">⚡</div>
+                        <div class="ride-name">Rapido Electric</div>
+                        <div class="ride-price">Starting ₹20</div>
+                    </div>
+                    <div class="ride-option" onclick="selectRide(this, 'auto', 30)">
+                        <div class="ride-icon">🛺</div>
+                        <div class="ride-name">Rapido Auto</div>
+                        <div class="ride-price">Starting ₹30</div>
+                    </div>
+                </div>
+
+                <div class="fare-details" id="fareDetails">
+                    <div class="fare-row">
+                        <span>Base Fare</span>
+                        <span id="baseFare">₹25</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Distance</span>
+                        <span id="distance">-- km</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Per KM Rate</span>
+                        <span>₹8/km</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>GST (5%)</span>
+                        <span id="gst">₹0</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>Total Fare</span>
+                        <span class="total-fare" id="totalFare">Calculating...</span>
+                    </div>
+                </div>
+
+                <div class="promo-code">
+                    <input type="text" id="promoInput" placeholder="Enter promo code">
+                    <button class="apply-btn" onclick="applyPromo()">Apply</button>
+                </div>
+
+                <button class="book-btn" onclick="requestRide()">Book Rapido 🛵</button>
+            </div>
+        </div>
+
+        <!-- Ride Status Section -->
+        <div id="rideStatusSection" class="ride-status">
+            <!-- Dynamic content -->
+        </div>
+
+        <!-- Ride History Section -->
+        <div id="historySection" class="history-section">
+            <h2>Your Ride History</h2>
+            <div id="historyList"></div>
+        </div>
+    </div>
+
+    <!-- User Info Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <h3>Almost there! 🎉</h3>
+            <p>Please enter your details to confirm the ride</p>
+            <input type="text" id="userName" placeholder="Your Name" required>
+            <input type="tel" id="userPhone" placeholder="Phone Number" required>
+            <button class="book-btn" onclick="confirmBooking()">Confirm Ride</button>
+            <button onclick="closeModal('userModal')" style="margin-top: 10px; background: #6c757d;">Cancel</button>
+        </div>
+    </div>
+
+    <!-- OTP Modal -->
+    <div id="otpModal" class="modal">
+        <div class="modal-content">
+            <h3>Enter OTP to Start Ride 🔐</h3>
+            <p>Share this OTP with your driver to begin your journey</p>
+            <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6">
+            <button class="book-btn" onclick="verifyOTP()">Start Ride</button>
+            <button onclick="closeModal('otpModal')" style="margin-top: 10px; background: #6c757d;">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
+    <div id="ratingModal" class="modal">
+        <div class="modal-content">
+            <h3>Rate Your Ride ⭐</h3>
+            <p>How was your experience with Rapido?</p>
+            <div style="display: flex; gap: 10px; justify-content: center; margin: 20px 0;">
+                <span style="font-size: 30px; cursor: pointer;" onclick="rateRide(1)">⭐</span>
+                <span style="font-size: 30px; cursor: pointer;" onclick="rateRide(2)">⭐⭐</span>
+                <span style="font-size: 30px; cursor: pointer;" onclick="rateRide(3)">⭐⭐⭐</span>
+                <span style="font-size: 30px; cursor: pointer;" onclick="rateRide(4)">⭐⭐⭐⭐</span>
+                <span style="font-size: 30px; cursor: pointer;" onclick="rateRide(5)">⭐⭐⭐⭐⭐</span>
+            </div>
+            <textarea id="review" placeholder="Share your feedback..." rows="3" style="width: 100%; padding: 10px; margin: 10px 0;"></textarea>
+            <button class="book-btn" onclick="submitRating()">Submit</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Global variables
+        let currentRide = null;
+        let selectedRideType = 'bike';
+        let selectedBaseFare = 25;
+        let currentFare = 0;
+        let userDetails = null;
+        let promoApplied = false;
+        let rideHistory = JSON.parse(localStorage.getItem('rideHistory') || '[]');
+        let drivers = [
+            { name: 'Ramesh', rating: 4.8, phone: '+91 98765 43210', vehicle: 'KA 01 AB 1234' },
+            { name: 'Suresh', rating: 4.9, phone: '+91 98765 43211', vehicle: 'KA 02 BC 5678' },
+            { name: 'Mahesh', rating: 4.7, phone: '+91 98765 43212', vehicle: 'KA 03 CD 9012' },
+            { name: 'Rajesh', rating: 4.9, phone: '+91 98765 43213', vehicle: 'KA 04 DE 3456' }
+        ];
+        
+        // Calculate fare
+        function calculateFare() {
+            const pickup = document.getElementById('pickup').value;
+            const destination = document.getElementById('destination').value;
+            
+            if (!pickup || !destination) return;
+            
+            // Calculate distance (random between 2-15 km)
+            const distance = (Math.random() * 13 + 2).toFixed(1);
+            document.getElementById('distance').innerHTML = `${distance} km`;
+            document.getElementById('baseFare').innerHTML = `₹${selectedBaseFare}`;
+            
+            // Calculate fare
+            const perKmRate = 8;
+            let fare = selectedBaseFare + (parseFloat(distance) * perKmRate);
+            
+            // Add GST
+            const gst = fare * 0.05;
+            let totalFare = fare + gst;
+            
+            // Apply promo discount
+            if (promoApplied) {
+                totalFare = totalFare * 0.5; // 50% off
+                document.getElementById('totalFare').innerHTML = `₹${Math.round(totalFare)} (50% OFF)`;
+            } else {
+                document.getElementById('totalFare').innerHTML = `₹${Math.round(totalFare)}`;
+            }
+            
+            document.getElementById('gst').innerHTML = `₹${Math.round(gst)}`;
+            currentFare = Math.round(totalFare);
+        }
+        
+        // Select ride type
+        function selectRide(element, ride, baseFare) {
+            selectedRideType = ride;
+            selectedBaseFare = baseFare;
+            document.querySelectorAll('.ride-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            calculateFare();
+        }
+        
+        // Swap locations
+        function swapLocations() {
+            const pickup = document.getElementById('pickup').value;
+            const destination = document.getElementById('destination').value;
+            document.getElementById('pickup').value = destination;
+            document.getElementById('destination').value = pickup;
+            calculateFare();
+        }
+        
+        // Apply promo code
+        function applyPromo() {
+            const promo = document.getElementById('promoInput').value.toUpperCase();
+            if (promo === 'RAPIDO2024' || promo === 'FIRSTRIDE') {
+                promoApplied = true;
+                showToast('Promo code applied! 50% off on your ride! 🎉');
+                calculateFare();
+                document.getElementById('promoInput').value = '';
+            } else {
+                showToast('Invalid promo code! Try RAPIDO2024');
+            }
+        }
+        
+        // Request ride
+        async function requestRide() {
+            const pickup = document.getElementById('pickup').value;
+            const destination = document.getElementById('destination').value;
+            
+            if (!pickup || !destination) {
+                showToast('Please enter pickup and destination');
+                return;
+            }
+            
+            // Show user modal
+            document.getElementById('userModal').style.display = 'flex';
+        }
+        
+        // Confirm booking
+        async function confirmBooking() {
+            const userName = document.getElementById('userName').value;
+            const userPhone = document.getElementById('userPhone').value;
+            
+            if (!userName || !userPhone) {
+                showToast('Please enter your name and phone number');
+                return;
+            }
+            
+            if (userPhone.length < 10) {
+                showToast('Please enter a valid phone number');
+                return;
+            }
+            
+            userDetails = { name: userName, phone: userPhone };
+            document.getElementById('userModal').style.display = 'none';
+            
+            const pickup = document.getElementById('pickup').value;
+            const destination = document.getElementById('destination').value;
+            
+            showToast('Finding nearest Rapido captain... 🛵');
+            
+            setTimeout(() => {
+                // Generate random driver
+                const randomDriver = drivers[Math.floor(Math.random() * drivers.length)];
+                const otp = Math.floor(100000 + Math.random() * 900000).toString();
+                
+                currentRide = {
+                    rideId: 'RAP' + Date.now(),
+                    pickup: pickup,
+                    destination: destination,
+                    userName: userName,
+                    userPhone: userPhone,
+                    fare: currentFare,
+                    status: 'pending',
+                    driverName: randomDriver.name,
+                    driverPhone: randomDriver.phone,
+                    driverRating: randomDriver.rating,
+                    vehicleNumber: randomDriver.vehicle,
+                    otp: otp,
+                    estimatedArrival: Math.floor(Math.random() * 8) + 2,
+                    bookedAt: new Date().toLocaleString(),
+                    rideType: selectedRideType
+                };
+                
+                showRideStatus();
+                showToast('Ride booked successfully! Your captain is on the way! 🎉');
+            }, 1500);
+        }
+        
+        // Show ride status
+        function showRideStatus() {
+            document.getElementById('bookingSection').style.display = 'none';
+            document.getElementById('historySection').style.display = 'none';
+            const statusSection = document.getElementById('rideStatusSection');
+            
+            statusSection.innerHTML = `
+                <div class="status-header">
+                    <div class="status-icon">🛵</div>
+                    <h2>Ride Confirmed! ✅</h2>
+                    <p>Your Rapido captain is on the way</p>
+                </div>
+                
+                <div class="driver-info">
+                    <div class="driver-avatar">👨‍✈️</div>
+                    <div class="driver-details">
+                        <div class="driver-name">${currentRide.driverName}</div>
+                        <div class="rating">⭐ ${currentRide.driverRating} ★</div>
+                        <div>🚗 ${currentRide.vehicleNumber}</div>
+                        <div>📞 ${currentRide.driverPhone}</div>
+                    </div>
+                </div>
+                
+                <div class="otp-box">
+                    <div>🔐 Your Ride OTP</div>
+                    <div class="otp-code">${currentRide.otp}</div>
+                    <small>Share this OTP with your driver to start the ride</small>
+                </div>
+                
+                <div class="fare-details">
+                    <div class="fare-row">
+                        <span>📍 From</span>
+                        <span><strong>${currentRide.pickup}</strong></span>
+                    </div>
+                    <div class="fare-row">
+                        <span>🏁 To</span>
+                        <span><strong>${currentRide.destination}</strong></span>
+                    </div>
+                    <div class="fare-row">
+                        <span>💰 Fare</span>
+                        <span class="total-fare">₹${currentRide.fare}</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>⏱️ Estimated Arrival</span>
+                        <span>${currentRide.estimatedArrival} mins</span>
+                    </div>
+                    <div class="fare-row">
+                        <span>🛵 Ride Type</span>
+                        <span>${currentRide.rideType === 'bike' ? 'Rapido Bike' : currentRide.rideType === 'electric' ? 'Rapido Electric' : 'Rapido Auto'}</span>
+                    </div>
+                </div>
+                
+                <div class="map-placeholder">
+                    <div class="moving-bike">🛵</div>
+                    <div style="position: relative; z-index: 1;">📍 Live Tracking Active</div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="cancel-btn" onclick="cancelRide()">❌ Cancel Ride</button>
+                    <button class="book-btn" onclick="showOTPModal()">🔓 Start Ride</button>
+                </div>
+            `;
+            
+            statusSection.style.display = 'block';
+        }
+        
+        // Show OTP modal
+        function showOTPModal() {
+            document.getElementById('otpModal').style.display = 'flex';
+        }
+        
+        // Verify OTP
+        async function verifyOTP() {
+            const otp = document.getElementById('otpInput').value;
+            
+            if (!otp) {
+                showToast('Please enter OTP');
+                return;
+            }
+            
+            if (otp === currentRide.otp) {
+                document.getElementById('otpModal').style.display = 'none';
+                completeRide();
+            } else {
+                showToast('❌ Invalid OTP! Please try again');
+            }
+        }
+        
+        // Complete ride
+        async function completeRide() {
+            showToast('🎉 Ride completed! Thank you for riding with Rapido!');
+            
+            // Save to history
+            currentRide.status = 'completed';
+            currentRide.completedAt = new Date().toLocaleString();
+            rideHistory.unshift(currentRide);
+            localStorage.setItem('rideHistory', JSON.stringify(rideHistory));
+            
+            setTimeout(() => {
+                document.getElementById('ratingModal').style.display = 'flex';
+            }, 2000);
+        }
+        
+        // Rate ride
+        let selectedRating = 0;
+        function rateRide(rating) {
+            selectedRating = rating;
+            showToast(`You rated ${rating} stars! ⭐`);
+        }
+        
+        function submitRating() {
+            const review = document.getElementById('review').value;
+            if (selectedRating > 0) {
+                showToast(`Thanks for your feedback! ⭐ ${selectedRating}/5`);
+                document.getElementById('ratingModal').style.display = 'none';
+                showBooking();
+            } else {
+                showToast('Please select a rating');
+            }
+        }
+        
+        // Cancel ride
+        async function cancelRide() {
+            if (confirm('Are you sure you want to cancel this ride?')) {
+                const cancellationFee = currentRide.status === 'accepted' ? 20 : 0;
+                showToast(`Ride cancelled${cancellationFee > 0 ? `! Cancellation fee: ₹${cancellationFee}` : ''}`);
+                showBooking();
+            }
+        }
+        
+        // Show booking section
+        function showBooking() {
+            document.getElementById('bookingSection').style.display = 'block';
+            document.getElementById('rideStatusSection').style.display = 'none';
+            document.getElementById('historySection').style.display = 'none';
+            currentRide = null;
+            promoApplied = false;
+            calculateFare();
+        }
+        
+        // Show ride history
+        function showHistory() {
+            document.getElementById('bookingSection').style.display = 'none';
+            document.getElementById('rideStatusSection').style.display = 'none';
+            const historySection = document.getElementById('historySection');
+            
+            if (rideHistory.length === 0) {
+                document.getElementById('historyList').innerHTML = '<div style="text-align: center; padding: 40px;">🚫 No rides found<br>Book your first ride now!</div>';
+            } else {
+                document.getElementById('historyList').innerHTML = rideHistory.map(ride => `
+                    <div class="history-item">
+                        <div><strong>🎫 ${ride.rideId}</strong></div>
+                        <div>📍 ${ride.pickup} → ${ride.destination}</div>
+                        <div>💰 ₹${ride.fare} | 🛵 ${ride.rideType === 'bike' ? 'Rapido Bike' : ride.rideType === 'electric' ? 'Rapido Electric' : 'Rapido Auto'}</div>
+                        <div>⭐ Rating: ${ride.rating ? ride.rating + ' ★' : 'Not rated'}</div>
+                        <div>📅 ${ride.bookedAt}</div>
+                        ${ride.completedAt ? `<div>✅ Completed: ${ride.completedAt}</div>` : ''}
+                    </div>
+                `).join('');
+            }
+            
+            historySection.style.display = 'block';
+        }
+        
+        // Show offers
+        function showOffers() {
+            showToast('🎁 Special Offers: FIRST RIDE FREE | Use code: RAPIDO2024');
+        }
+        
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Show toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Calculate fare on input change
+        document.getElementById('pickup').addEventListener('input', calculateFare);
+        document.getElementById('destination').addEventListener('input', calculateFare);
+        
+        // Initial calculation
+        calculateFare();
+        
+        // Close modals on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        
+        // Auto-refresh live location every 5 seconds (demo)
+        if (currentRide) {
+            setInterval(() => {
+                if (currentRide && currentRide.status === 'in-progress') {
+                    const locations = ['Nearby', '2 km away', '1 km away', 'Arriving soon'];
+                    const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+                    // Could update UI with live location
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
